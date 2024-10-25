@@ -26,7 +26,7 @@ function App() {
     })
   }
   const incrementQuantity = (id) => {
-    setBasket(prev =>
+    setBasket(prev => 
       prev.map(item =>
         item.id === id ? { ...item, quantity: item.quantity + 1 } : item
       )
