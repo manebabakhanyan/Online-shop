@@ -12,6 +12,19 @@ function App() {
     { id: 8, title: 'Politics', price: 31, photo: '../src/Images/9780593844120_cover.webp' }
   ])
   const [basket, setBasket] = useState([])
+  const moveToCard = (product) => {
+    setBasket(prev => {
+      let found = prev.find(item => item.id == product.id)
+      if (!found) {
+        return [...prev, { ...product, quantity: 1 }]
+      }
+      else{
+        return prev.map(item =>
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      }
+    })
+  }
   return (
     <>
       <div className="row">
@@ -24,7 +37,7 @@ function App() {
                 return <div key={item.id}>
                   <img src={item.photo} alt={item.title} />
                   <p>{item.title} <strong>{item.price} USD</strong></p>
-                  <button>move</button>
+                  <button onClick={() => moveToCard(item)}>move</button>
                 </div>
               })
             }
@@ -32,6 +45,29 @@ function App() {
         </div>
         <div>
           <h3>Basket</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                basket.map(item => <tr key={item.id}>
+                  <td>{item.title}</td>
+                  <td>{item.price}</td>
+                  <td>{item.quantity}</td>
+                  <td>{item.quantity * item.price} USD</td>
+                  <td></td>
+                </tr>
+                )
+              }
+            </tbody>
+          </table>
         </div>
       </div>
     </>

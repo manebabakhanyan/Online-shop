@@ -17,3 +17,11 @@
 img{
   width: 170px;
 }
+table{
+  border-collapse: collapse;
+  width: 500px;
+}
+table, tr, td, th{
+  border: 1px solid gray;
+  padding: 3px;
+}
