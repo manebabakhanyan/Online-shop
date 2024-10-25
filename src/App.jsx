@@ -18,12 +18,32 @@ function App() {
       if (!found) {
         return [...prev, { ...product, quantity: 1 }]
       }
-      else{
+      else {
         return prev.map(item =>
           item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
         );
       }
     })
+  }
+  const incrementQuantity = (id) => {
+    setBasket(prev =>
+      prev.map(item =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  }
+
+  const decrementQuantity = (id) => {
+    setBasket(prev =>
+      prev.map(item =>
+        item.id === id && item.quantity > 1
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      )
+    );
+  }
+  const removeFromCard = id => {
+    setBasket(prev => prev.filter(el => el.id !== id))
   }
   return (
     <>
@@ -62,7 +82,11 @@ function App() {
                   <td>{item.price}</td>
                   <td>{item.quantity}</td>
                   <td>{item.quantity * item.price} USD</td>
-                  <td></td>
+                  <td>
+                    <button onClick={() => incrementQuantity(item.id)}>+</button>
+                    <button onClick={() => decrementQuantity(item.id)}>-</button>
+                    <button onClick={() => removeFromCard(item.id)}>x</button>
+                  </td>
                 </tr>
                 )
               }

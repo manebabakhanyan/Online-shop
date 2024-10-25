@@ -25,3 +25,9 @@ table, tr, td, th{
   border: 1px solid gray;
   padding: 3px;
 }
+tbody td button{
+  background-color: transparent;
+  border: 1px solid mediumvioletred;
+  color: mediumvioletred;
+  margin-right: 15px
+}
